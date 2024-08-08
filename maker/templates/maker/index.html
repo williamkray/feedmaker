@@ -1,10 +1,18 @@
-<h1>Feed maker</h1>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://www.jobmachine.org/assets/css/main.css">
+  </head>
+  
+  <div id="wrapper">
+    <header id="header">
+<h1>RSSify</h1>
 
-<p>Quickly generate an RSS feed from any website</p>
+<p>Quickly generate an RSS feed from any website. Stolen from <a href="https://kschaul.com/post/2023/04/16/feedmaker-quickly-generate-an-rss-feed-from-any-website/">Kevin Schaul</a></p>
+    </header>
 
-<p>By <a href="https://www.kschaul.com/">Kevin Schaul</a></p>
 
-<h2>Make your own feed</h2>
+    <div id="main">
+      <section class="main content">
 
 <p>Enter your own options, or choose an example:</p>
 
@@ -16,7 +24,13 @@
 
 <form id="maker-form">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% for field in form %}
+    <div class="form-group">
+      {{ field }}
+      {{ field.label_tag }}
+      {{ field.errors }}
+    </div>
+    {% endfor %}
     <button id="maker-submit">Test</button>
 </form>
 
@@ -91,3 +105,6 @@
         populateFeed();
     });
 </script>
+      </section>
+    </div>
+</html>
