@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
   <head>
     <link rel="stylesheet" href="https://www.jobmachine.org/assets/css/main.css">
@@ -23,15 +24,23 @@
 </ul>
 
 <form id="maker-form">
+    <div class="row gtr-uniform">
     {% csrf_token %}
     {% for field in form %}
-    <div class="form-group">
-      {{ field }}
-      {{ field.label_tag }}
-      {{ field.errors }}
+      <div class="col-12">
+      {% if field.field.widget.input_type == "checkbox" %}
+        {{ field }}
+        {{ field.label_tag }}
+        {{ field.errors }}
+      {% else %}
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
+      {% endif %}
     </div>
     {% endfor %}
-    <button id="maker-submit">Test</button>
+    <ul class="actions"><li><button id="maker-submit">Test</button></li></ul>
+    </div>
 </form>
 
 <div id="maker-test-url"></div>
